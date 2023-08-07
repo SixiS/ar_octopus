@@ -23,8 +23,8 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.2.0'
 
-  s.add_dependency 'activerecord', "~> 6.0.6.1"
-  s.add_dependency 'activesupport', "~> 6.0.6.1"
+  s.add_dependency 'activerecord', "< 7.0.0.0"
+  s.add_dependency 'activesupport', "< 7.0.0.0"
 
   s.add_development_dependency 'appraisal', '>= 0.3.8'
   s.add_development_dependency 'mysql2', '~> 0.5'
