@@ -320,7 +320,6 @@ module Octopus
 
         val = preparable.nil? ? select_connection.send(method, *args, &block) : select_connection.send(method, *args, **preparable, &block)
         val.current_shard = slave if val.instance_of? ActiveRecord::Result
-
         val
       end
     end

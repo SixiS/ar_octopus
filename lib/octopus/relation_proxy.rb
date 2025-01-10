@@ -34,7 +34,6 @@ module Octopus
         ::Enumerator.new do |yielder|
           run_on_shard do
             parsed_args = args.empty? ? {} : args.first
-
             @ar_relation.public_send(method, **parsed_args) do |batch_item|
               yielder << batch_item
             end
@@ -46,7 +45,6 @@ module Octopus
         ::Octopus::ScopeProxy.new(@current_shard, run_on_shard { @ar_relation.public_send(method, *args) })
       elsif block
         parsed_args = args.empty? ? {} : args.first
-
         @ar_relation.public_send(method, **parsed_args, &block)
       else
         run_on_shard do

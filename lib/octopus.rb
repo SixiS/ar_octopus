@@ -28,6 +28,18 @@ module Octopus
     end
   end
 
+  # To support psych-4
+  # Copied from rails patch
+  # https://github.com/rails/rails/commit/179d0a1f474ada02e0030ac3bd062fc653765dbe
+  def self.load_yaml(file_name)
+    source = ERB.new(File.read(file_name)).result
+    begin
+      YAML.load(source, aliases: true) || {}
+    rescue ArgumentError
+      YAML.load(source) || {}
+    end
+  end
+
   def self.load_balancer=(balancer)
     @load_balancer = balancer
   end
