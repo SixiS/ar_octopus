@@ -309,7 +309,7 @@ describe Octopus::Model do
       if Octopus.atleast_rails52?
         expect(User.using(:postgresql_shard).connection.adapter_name).to eq('PostgreSQL')
         expect(User.using(:alone_shard).connection.adapter_name).to eq('Mysql2')
-      else 
+      else
         expect(User.using(:postgresql_shard).arel_engine.connection.adapter_name).to eq('PostgreSQL')
         expect(User.using(:alone_shard).arel_engine.connection.adapter_name).to eq('Mysql2')
       end

@@ -3,7 +3,7 @@ $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'octopus/version'
 
 Gem::Specification.new do |s|
-  s.name        = 'ar-octopus'
+  s.name        = 'ar-octopus-ruby-3'
   s.version     = Octopus::VERSION
   s.authors     = ['Thiago Pradi', 'Mike Perham', 'Gabriel Sobrinho']
   s.email       = ['tchandy@gmail.com', 'mperham@gmail.com', 'gabriel.sobrinho@gmail.com']
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.post_install_message = "Important: If you are upgrading from < Octopus 0.5.0 you need to run:\n" \
-                           "$ rake octopus:copy_schema_versions\n\n" \
+                           "$ rake octopus:copy_scha_versions\n\n" \
                            'Octopus now stores schema version information in each shard and migrations will not ' \
                            'work properly unless this task is invoked.'
 

@@ -18,10 +18,10 @@ module Octopus
     @config ||= begin
       file_name = File.join(Octopus.directory, 'config/shards.yml').to_s
 
-      if File.exist?(file_name) || File.symlink?(file_name)
-        config ||= HashWithIndifferentAccess.new(load_yaml(file_name))[Octopus.env]
+      config = if File.exist?(file_name) || File.symlink?(file_name)
+        HashWithIndifferentAccess.new(YAML.unsafe_load(ERB.new(File.read(file_name)).result))[Octopus.env]
       else
-        config ||= HashWithIndifferentAccess.new
+        HashWithIndifferentAccess.new
       end
 
       config
@@ -111,9 +111,9 @@ module Octopus
   end
 
   def self.rails50?
-    ActiveRecord::VERSION::MAJOR == 5 && ActiveRecord::VERSION::MINOR == 0
+    ActiveRecord::VERSION::MAJOR == 5 && ActiveRecord::VERSION::MINOR.zero?
   end
-  
+
   def self.atleast_rails50?
     ActiveRecord::VERSION::MAJOR >= 5
   end
@@ -141,10 +141,10 @@ module Octopus
   attr_writer :logger
 
   def self.logger
-    if defined?(Rails.logger)
-      @logger ||= Rails.logger
+    @logger = if defined?(Rails.logger)
+      Rails.logger
     else
-      @logger ||= Logger.new($stderr)
+      Logger.new($stderr)
     end
   end
 
